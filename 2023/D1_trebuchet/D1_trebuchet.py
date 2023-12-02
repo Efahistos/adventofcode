@@ -41,7 +41,7 @@ def replace_text_number(file_text):
         'nine':'n9e'
     }
     chiffre = '|'.join([f"[{key}]" for key in dict.keys()])
-    pattern = f'({chiffre})(.*)({chiffre})'
+    # pattern = f'({chiffre})(.*)({chiffre})'
     for row in file_text:
         temp = row
         for i in range(0, len(row)-1):
@@ -52,10 +52,10 @@ def replace_text_number(file_text):
     return result
 
 
-# file_path = 'advent_of_code\\D1_trebuchet\\test1.txt'
-# with open(file=file_path, mode='r') as f:
-#     tosum(file_text=f)
-file_path = 'advent_of_code\\D1_trebuchet\\test2.txt'
+# file_path = '2023\\D1_trebuchet\\test1.txt'
+file_path = '2023\\D1_trebuchet\\test_final.txt'
+with open(file=file_path, mode='r') as f:
+    tosum(file_text=f)
 with open(file=file_path, mode='r') as f:
     result = replace_text_number(file_text=f)
     tosum(file_text=result.split("\n")) # 54431
