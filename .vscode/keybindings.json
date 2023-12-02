@@ -1,0 +1,10 @@
+[
+    {
+        "key": "ctrl+alt+c",
+        "command": "git.commitAll"
+    },
+    {
+        "key": "ctrl+alt+p",
+        "command": "git.push"
+    }
+]
