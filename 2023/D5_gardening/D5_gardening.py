@@ -28,6 +28,27 @@ def get_map_info(seed, map):
             return range_seed + int(map_row[0])
     return int(seed)
 
+def merge_map(map_source, map_target):
+    result = []
+    for source in map_source:
+        source_start = int(source[1])
+        source_end = source_start + int(source[2])
+        for target in map_target:
+            target_start = int(target[1])
+            target_end = target_start + int(target[2])
+            if target_start <= source_start <= target_end:
+                start = source_start
+            else:
+                start = target_start
+            if target_start <= source_end <= target_end:
+                end = source_end
+            else:
+                end = target_end
+            if range_seed >= 0 and range_seed < int(target[2]):
+                return range_seed + int(target[0])
+
+
+
 def use_maps(seed, data):
     soil = get_map_info(seed, map=data['seed-to-soil'])
     fertilizer = get_map_info(soil, map=data['soil-to-fertilizer'])
@@ -40,19 +61,21 @@ def use_maps(seed, data):
 file_path = '2023\\D5_gardening\\test1.txt'
 # file_path = '2023\\D5_gardening\\test_final.txt'
 locations = []
-locations_p2 = []
 with open(file=file_path, mode='r') as f:
     data = parse_data(file_text=f)
 seeds = data['seeds']
+
 for seed in seeds:
     locations.append(use_maps(seed, data=data))
-logging.debug(locations)
-min_loc_p2 = 999999999999999999999999999999
-for i in range(0, len(seeds), 2):
 
-    for seed in range(int(seeds[i]), int(seeds[i]) + int(seeds[i+1])):
-        min_loc_p2 = min(min_loc_p2, use_maps(seed, data=data))
-logging.debug(locations_p2)
+merge_map(map_source=[[0, 0, 100]], map_target=data['seed-to-soil'])
+# logging.debug(locations)
+# min_loc_p2 = 999999999999999999999999999999
+# for i in range(0, len(seeds), 2):
+
+#     for seed in range(int(seeds[i]), int(seeds[i]) + int(seeds[i+1])):
+#         min_loc_p2 = min(min_loc_p2, use_maps(seed, data=data))
+# logging.debug(min_loc_p2)
         
 logging.info(f'-----------------result P1: {min(locations)}')
-logging.info(f'-----------------result P2: {min(locations_p2)}')
+# logging.info(f'-----------------result P2: {min_loc_p2}')
