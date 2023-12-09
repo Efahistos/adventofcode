@@ -1,7 +1,7 @@
 from re import finditer
 import logging
 
-level = logging.DEBUG
+level = logging.INFO
 logging_format = "%(message)s"
 logging.basicConfig(level = level, format=logging_format)
 
@@ -43,7 +43,7 @@ def parse_data_P2(file_text):
         else:
             test_J = True
             for v in sorted(hand.values(), reverse=True):
-                type_hand += power_hand.get(v, 0) + (J_number if test_J else 0)
+                type_hand += power_hand.get(v + (J_number if test_J else 0), 0)
                 test_J = False
         result.append({'cards':cards, 'type_hand':type_hand, 'alpha_hand':alpha_hand, 'bid':bid})
     return result
@@ -57,7 +57,7 @@ def mult(list_numbers):
     return result
 
 file_path = '2023\\D7_camel_poker\\test1.txt'
-# file_path = '2023\\D7_camel_poker\\test_final.txt'
+file_path = '2023\\D7_camel_poker\\test_final.txt'
 with open(file=file_path, mode='r') as f:
     data = parse_data(file_text=f)
     logging.debug(data)
