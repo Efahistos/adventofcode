@@ -74,3 +74,4 @@ for step in steps_P2:
 logging.info(f'-----------------result P2: {mult([a[0]for a in dict_p2_aggreg.values()])*283}')
 
 # {'PQZ': 20659, 'ZZZ': 20093, 'BKZ': 14999, 'XNZ': 17263, 'KJZ': 22357, 'XLZ': 16697}
+print (mult([61, 293,67, 59, 43, 73, 71]))
